@@ -18,6 +18,7 @@
 
         <JavaLib.version>2.1.2</JavaLib.version>
         <api-result.version>2.4.0</api-result.version>
+        <netty.version>4.1.36.Final</netty.version>
     </properties>
     <dependencies>
         <!-- redis -->
@@ -102,6 +103,13 @@
             <groupId>com.fengwenyi</groupId>
             <artifactId>api-result</artifactId>
             <version>${api-result.version}</version>
+        </dependency>
+
+        <!-- netty -->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>${netty.version}</version>
         </dependency>
     </dependencies>
 
