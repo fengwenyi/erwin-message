@@ -19,6 +19,7 @@
         <JavaLib.version>2.1.2</JavaLib.version>
         <api-result.version>2.4.0</api-result.version>
         <netty.version>4.1.36.Final</netty.version>
+        <springdoc.version>1.5.8</springdoc.version>
     </properties>
     <dependencies>
         <!-- redis -->
@@ -110,6 +111,13 @@
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
             <version>${netty.version}</version>
+        </dependency>
+
+        <!-- swagger -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>${springdoc.version}</version>
         </dependency>
     </dependencies>
 
