@@ -20,6 +20,7 @@
         <api-result.version>2.4.0</api-result.version>
         <netty.version>4.1.36.Final</netty.version>
         <springdoc.version>1.5.8</springdoc.version>
+        <mybatis-plus.version>3.4.3.1</mybatis-plus.version>
     </properties>
     <dependencies>
         <!-- redis -->
@@ -118,6 +119,13 @@
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-ui</artifactId>
             <version>${springdoc.version}</version>
+        </dependency>
+
+        <!-- mybatis-plus-boot-starter -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis-plus.version}</version>
         </dependency>
     </dependencies>
 
