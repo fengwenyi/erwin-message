@@ -8,6 +8,8 @@ public class ErwinMessageApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ErwinMessageApplication.class, args);
+
     }
+
 
 }

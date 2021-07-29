@@ -1,8 +1,7 @@
 package com.fengwenyi.erwinmessage.security.handler;
 
-import com.alibaba.fastjson.JSON;
-import com.fengwenyi.api_result.helper.ResultHelper;
-import com.fengwenyi.api_result.model.ResultModel;
+import com.fengwenyi.api.result.ResultTemplate;
+import com.fengwenyi.javalib.convert.JsonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -32,8 +31,8 @@ public class MyLogoutSuccessHandler implements LogoutSuccessHandler {
 
         response.setContentType("application/json;charset=UTF-8");
         ServletOutputStream out = response.getOutputStream();
-        ResultModel<Map<String, String>> resultModel = ResultHelper.success("Success");
-        String str = JSON.toJSONString(resultModel);
+        ResultTemplate<Map<String, String>> resultModel = ResultTemplate.success();
+        String str = JsonUtils.convertString(resultModel);
         out.write(str.getBytes(StandardCharsets.UTF_8));
         out.flush();
         out.close();

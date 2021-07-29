@@ -1,14 +1,14 @@
 package com.fengwenyi.erwinmessage.security.access;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.fengwenyi.mount.db.model.PermissionModel;
-import com.fengwenyi.mount.db.model.RoleModel;
-import com.fengwenyi.mount.db.model.RolePermissionModel;
-import com.fengwenyi.mount.db.service.MPPermissionService;
-import com.fengwenyi.mount.db.service.MPRolePermissionService;
-import com.fengwenyi.mount.db.service.MPRoleService;
-import com.fengwenyi.mount.enums.DeleteStatusEnum;
-import com.fengwenyi.mount.enums.ReleaseStatusEnum;
+import com.fengwenyi.erwinmessage.entity.PermissionEntity;
+import com.fengwenyi.erwinmessage.entity.RoleEntity;
+import com.fengwenyi.erwinmessage.entity.RolePermissionEntity;
+import com.fengwenyi.erwinmessage.enums.DeleteStatusEnum;
+import com.fengwenyi.erwinmessage.enums.ReleaseStatusEnum;
+import com.fengwenyi.erwinmessage.repository.MPPermissionRepository;
+import com.fengwenyi.erwinmessage.repository.MPRolePermissionRepository;
+import com.fengwenyi.erwinmessage.repository.MPRoleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.PermissionEvaluator;
@@ -30,13 +30,13 @@ import java.util.List;
 public class MyPermissionEvaluator implements PermissionEvaluator {
 
     @Autowired
-    private MPRolePermissionService mpRolePermissionService;
+    private MPRolePermissionRepository mpRolePermissionRepository;
 
     @Autowired
-    private MPPermissionService mpPermissionService;
+    private MPPermissionRepository mpPermissionRepository;
 
     @Autowired
-    private MPRoleService mpRoleService;
+    private MPRoleRepository mpRoleRepository;
 
     @Override
     public boolean hasPermission(Authentication authentication, Object targetDomainObject, Object permission) {
@@ -49,23 +49,20 @@ public class MyPermissionEvaluator implements PermissionEvaluator {
         // 遍历用户所有角色
         for(GrantedAuthority authority : authorities) {
             String roleName = authority.getAuthority();
-            List<RoleModel> roleModelList = mpRoleService.list(
-                    new LambdaQueryWrapper<RoleModel>()
-                            .eq(RoleModel::getRole, roleName)
-                            .eq(RoleModel::getDeleteStatus, DeleteStatusEnum.NORMAL.getCode())
-                            .eq(RoleModel::getReleaseStatus, ReleaseStatusEnum.RELEASE.getCode()));
+            List<RoleEntity> roleModelList = mpRoleRepository.list(
+                    new LambdaQueryWrapper<RoleEntity>()
+                            .eq(RoleEntity::getRole, roleName)
+                            .eq(RoleEntity::getReleaseStatus, ReleaseStatusEnum.YES.getCode()));
             if (roleModelList.size() == 1) {
-                RoleModel roleModel = roleModelList.get(0);
+                RoleEntity roleModel = roleModelList.get(0);
                 if (roleModel != null && roleModel.getId() != null) {
-                    List<RolePermissionModel> rolePermissionModelList = mpRolePermissionService.list(
-                            new LambdaQueryWrapper<RolePermissionModel>()
-                                    .eq(RolePermissionModel::getRoleId, roleModel.getId())
-                                    .eq(RolePermissionModel::getDeleteStatus, DeleteStatusEnum.NORMAL.getCode())
-                                    .eq(RolePermissionModel::getReleaseStatus, ReleaseStatusEnum.RELEASE.getCode()));
-                    for (RolePermissionModel rolePermissionModel : rolePermissionModelList) {
-                        PermissionModel permissionModel = mpPermissionService.getById(rolePermissionModel.getPermissionId());
-                        if (permissionModel.getDeleteStatus().equals(DeleteStatusEnum.NORMAL.getCode())
-                                && permissionModel.getReleaseStatus().equals(ReleaseStatusEnum.RELEASE.getCode())) {
+                    List<RolePermissionEntity> rolePermissionModelList = mpRolePermissionRepository.list(
+                            new LambdaQueryWrapper<RolePermissionEntity>()
+                                    .eq(RolePermissionEntity::getRoleId, roleModel.getId())
+                                    .eq(RolePermissionEntity::getReleaseStatus, ReleaseStatusEnum.YES.getCode()));
+                    for (RolePermissionEntity rolePermissionModel : rolePermissionModelList) {
+                        PermissionEntity permissionModel = mpPermissionRepository.getById(rolePermissionModel.getPermissionId());
+                        if (permissionModel.getReleaseStatus()) {
                             // 如果访问的Url和权限用户符合的话，返回true
                             if(targetDomainObject.equals("")
                                     && permission.equals("")) {

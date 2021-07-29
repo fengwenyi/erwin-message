@@ -1,11 +1,9 @@
 package com.fengwenyi.erwinmessage.security.handler;
 
+import com.fengwenyi.erwinmessage.security.service.UserService;
+import com.fengwenyi.erwinmessage.security.util.MyUserUtils;
+import com.fengwenyi.erwinmessage.security.util.TokenUtils;
 import com.fengwenyi.javalib.util.StringUtils;
-import com.fengwenyi.mount.security.bean.AuthenticationUser;
-import com.fengwenyi.mount.security.entity.UserEntity;
-import com.fengwenyi.mount.security.service.UserService;
-import com.fengwenyi.mount.security.util.MyUserUtils;
-import com.fengwenyi.mount.security.util.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

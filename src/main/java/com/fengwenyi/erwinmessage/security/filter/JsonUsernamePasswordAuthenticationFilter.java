@@ -1,7 +1,6 @@
 package com.fengwenyi.erwinmessage.security.filter;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+import com.fengwenyi.javalib.convert.JsonUtils;
 import lombok.SneakyThrows;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationServiceException;
@@ -15,6 +14,7 @@ import org.springframework.util.StringUtils;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
 /**
  * @author Erwin Feng[xfsy_2015@163.com]
@@ -46,11 +46,9 @@ public class JsonUsernamePasswordAuthenticationFilter extends UsernamePasswordAu
         String body = StreamUtils.copyToString(request.getInputStream(), StandardCharsets.UTF_8);
         String username = null, password = null;
         if(StringUtils.hasText(body)) {
-            JSONObject jsonObj = JSON.parseObject(body);
-            username = jsonObj.getString(super.getUsernameParameter());
-            password = jsonObj.getString(super.getPasswordParameter());
-//            System.out.println(username);
-//            System.out.println(password);
+            Map<String, String> loginMap = JsonUtils.convertMap(body, String.class, String.class);
+            username = loginMap.get("username");
+            password = loginMap.get("password");
         }
 
         if (username == null) {

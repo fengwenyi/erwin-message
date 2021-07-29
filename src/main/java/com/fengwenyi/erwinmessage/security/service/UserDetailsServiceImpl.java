@@ -1,6 +1,6 @@
 package com.fengwenyi.erwinmessage.security.service;
 
-import com.fengwenyi.mount.security.entity.UserEntity;
+import com.fengwenyi.erwinmessage.security.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;

@@ -1,12 +1,11 @@
 package com.fengwenyi.erwinmessage.security.handler;
 
-import com.alibaba.fastjson.JSON;
-import com.fengwenyi.api_result.helper.ResultHelper;
-import com.fengwenyi.api_result.model.ResultModel;
-import com.fengwenyi.mount.security.entity.UserEntity;
-import com.fengwenyi.mount.security.service.UserService;
-import com.fengwenyi.mount.security.util.JwtTokenUtils;
-import com.fengwenyi.mount.security.util.TokenUtils;
+import com.fengwenyi.api.result.ResultTemplate;
+import com.fengwenyi.erwinmessage.security.entity.UserEntity;
+import com.fengwenyi.erwinmessage.security.service.UserService;
+import com.fengwenyi.erwinmessage.security.util.JwtTokenUtils;
+import com.fengwenyi.erwinmessage.security.util.TokenUtils;
+import com.fengwenyi.javalib.convert.JsonUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -61,8 +60,8 @@ public class MyAuthenticationSuccessHandler implements AuthenticationSuccessHand
         ServletOutputStream out = response.getOutputStream();
         Map<String, String> map = new HashMap<>();
         map.put("token", token);
-        ResultModel<Map<String, String>> resultModel = ResultHelper.success("Success", map);
-        String str = JSON.toJSONString(resultModel);
+        ResultTemplate<Map<String, String>> resultModel = ResultTemplate.success(map);
+        String str = JsonUtils.convertString(resultModel);
         out.write(str.getBytes(StandardCharsets.UTF_8));
         out.flush();
         out.close();

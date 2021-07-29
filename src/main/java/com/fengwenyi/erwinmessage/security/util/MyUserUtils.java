@@ -1,17 +1,10 @@
 package com.fengwenyi.erwinmessage.security.util;
 
-import com.fengwenyi.mount.security.bean.AuthenticationUser;
-import com.fengwenyi.mount.security.entity.UserEntity;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 
 /**
  * @author Erwin Feng[xfsy_2015@163.com]
