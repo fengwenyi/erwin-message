@@ -86,20 +86,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                             new StaticHeadersWriter(Arrays.asList(
                                     new Header("Access-control-Allow-Origin","*"),
                                     new Header("Access-Control-Expose-Headers","Authorization"))))
-                .and()
+                //.and()
                     //指定登录界面，并且设置为所有人都能访问；
-                    .formLogin()
+                    //.formLogin()
 //                    .loginPage("/login")
 //                    .usernameParameter("username")
 //                    .passwordParameter("password")
-                    .loginProcessingUrl("/admin/auth/login")
-                    .permitAll()
+                    //.loginProcessingUrl("/auth/login")
+                    //.permitAll()
 //                    .successHandler(myAuthenticationSuccessHandler)
 //                    .failureHandler(myAuthenticationFailureHandler)
                 .and()
                     //使用默认的logoutFilter
                     .logout()
-                    .logoutUrl("/admin/auth/logout")   //默认就是"/logout"
+                    .logoutUrl("/auth/logout")   //默认就是"/logout"
                     .addLogoutHandler(myLogoutHandler)  //logout时清除token
                     .logoutSuccessHandler(myLogoutSuccessHandler) //logout成功后返回200
                 .and()
@@ -137,9 +137,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         filter.setAuthenticationManager(authenticationManagerBean());
         filter.setAuthenticationSuccessHandler(myAuthenticationSuccessHandler);
         filter.setAuthenticationFailureHandler(myAuthenticationFailureHandler);
-        filter.setUsernameParameter("account");
+        filter.setUsernameParameter("username");
         filter.setPasswordParameter("password");
-        filter.setFilterProcessesUrl("/api-index/auth/login");
+        filter.setFilterProcessesUrl("/auth/login");
         return filter;
     }
 }
