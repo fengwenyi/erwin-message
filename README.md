@@ -36,3 +36,7 @@ POST http://localhost:9191/auth/login
     }
 }
 ```
+
+## Swagger 3
+
+> http://localhost:9191/swagger-ui/index.html?url=/v3/api-docs
