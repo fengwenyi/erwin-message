@@ -19,7 +19,7 @@
 ## 登录
 
 ```
-POST http://localhost:9191/api-index/auth/login
+POST http://localhost:9191/auth/login
 {
     "username":"xfsy_2015@163.com",
     "password":"123456"
