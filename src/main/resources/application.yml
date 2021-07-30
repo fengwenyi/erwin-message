@@ -8,6 +8,24 @@ spring:
   profiles:
     active: dev
 
+  mail:
+    # 设置邮箱主机
+    ##邮箱服务器地址
+    ##QQ smtp.qq.com
+    ##sina smtp.sina.cn
+    ##aliyun smtp.aliyun.com
+    ##163 smtp.163.com
+    host: smtp.163.com
+    # 设置用户名
+    username:
+    # 设置密码，邮箱开启SMTP的授权码而非QQ密码
+    password:
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable: true
+
 
 #mybatis
 mybatis-plus:

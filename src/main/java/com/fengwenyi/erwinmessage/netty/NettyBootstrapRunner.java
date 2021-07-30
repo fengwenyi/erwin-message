@@ -62,7 +62,9 @@ public class NettyBootstrapRunner implements ApplicationRunner, ApplicationListe
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally {
-            channel.close();
+            if (channel != null && channel.isActive()) {
+                channel.close();
+            }
             //关闭主线程组
             bossGroup.shutdownGracefully();
             //关闭工作线程组
