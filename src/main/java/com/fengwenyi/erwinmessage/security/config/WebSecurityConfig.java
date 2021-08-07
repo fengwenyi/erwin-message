@@ -72,6 +72,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                     .antMatchers("/static/**", "/favicon.ico").permitAll() //静态资源访问无需认证
                     .antMatchers("/", "/swagger-ui/**", "/v3/api-docs").permitAll() // 允许访问的接口
+                    .antMatchers("/common/**").permitAll() // 允许访问的接口
                     .antMatchers("/admin/**").hasAnyRole("ADMIN") //admin开头的请求，需要admin权限
                     .antMatchers("/api-admin/**").hasAnyRole("ADMIN") // admin开头的请求，需要admin权限
                     .antMatchers("/api-index/**").permitAll() // 无权限

@@ -5,6 +5,8 @@ spring:
     url: jdbc:mysql://192.168.16.128:3306/erwin-message
     username: root
     password: 123456
+  redis:
+    host: 192.168.16.128
 
 
 mybatis-plus:
